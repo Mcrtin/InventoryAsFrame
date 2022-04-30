@@ -1,0 +1,4 @@
+name: InventoryAsFrame
+version: 1.0
+main: io.github.riesenpilz.inventoryAsFrame.Main
+api-version: 1.13
