@@ -1,5 +1,6 @@
 package io.github.riesenpilz.inventoryAsFrame;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
@@ -27,7 +28,7 @@ public class Frame {
 			throw new IllegalArgumentException("buttons must be divisible by 9");
 		this.buttons = buttons;
 		this.name = name;
-		setInventory();
+		initiateInventory();
 	}
 
 	public Frame(String name, Button button, int size) {
@@ -35,10 +36,9 @@ public class Frame {
 			throw new NullPointerException("size must be divisible by 9");
 		this.name = name;
 		Button[] buttons = new Button[size];
-		for (int i = 0; i < size; i++)
-			buttons[i] = button;
+		Arrays.fill(buttons, button);
 		this.buttons = buttons;
-		setInventory();
+		initiateInventory();
 	}
 
 	public void openInventory(Player player) {
@@ -84,11 +84,10 @@ public class Frame {
 	}
 
 	public void updateInventory() {
-		for (int i = 0; i < buttons.length; i++)
-			inventory.setItem(i, buttons[i]);
+		inventory.setContents(buttons);
 	}
 
-	private void setInventory() {
+	private void initiateInventory() {
 		inventory = Bukkit.createInventory(null, buttons.length, name);
 		updateInventory();
 	}
